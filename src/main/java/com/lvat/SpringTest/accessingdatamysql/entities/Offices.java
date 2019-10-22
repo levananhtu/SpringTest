@@ -1,11 +1,14 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "Offices")
 @Table(name = "offices")
-public class Offices {
+public class Offices implements Serializable {
     @Id
     @Column(name = "office_code", nullable = false)
     private String officeCode;
@@ -37,7 +40,7 @@ public class Offices {
     @OneToMany(targetEntity = Employees.class)
 //    @JoinColumn(referencedColumnName = "office_code", name = "office_code", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "office_code", name = "office_code")
-    private Collection<Employees> employeesCollection;
+    private List<Employees> employeesList;
 
     public Offices() {
     }
@@ -126,11 +129,12 @@ public class Offices {
         this.territory = territory;
     }
 
-    public Collection<Employees> getEmployeesCollection() {
-        return employeesCollection;
+    @JsonIgnore
+    public List<Employees> getEmployeesList() {
+        return employeesList;
     }
 
-    public void setEmployeesCollection(Collection<Employees> employeesCollection) {
-        this.employeesCollection = employeesCollection;
+    public void setEmployeesList(List<Employees> employeesList) {
+        this.employeesList = employeesList;
     }
 }

@@ -1,13 +1,14 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.OrderDetailsKey;
-import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "OrderDetails")
 @Table(name = "order_details", indexes = {@Index(name = "product_code", columnList = "product_code")})
-public class OrderDetails {
+public class OrderDetails implements Serializable {
     @EmbeddedId
     private OrderDetailsKey orderDetailsKey;
 
@@ -81,6 +82,7 @@ public class OrderDetails {
         this.orderLineNumber = orderLineNumber;
     }
 
+    @JsonIgnore
     public Orders getOrder() {
         return order;
     }
@@ -89,6 +91,7 @@ public class OrderDetails {
         this.order = order;
     }
 
+    @JsonIgnore
     public Products getProduct() {
         return product;
     }

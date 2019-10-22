@@ -1,12 +1,15 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "employees",
         indexes = {@Index(name = "office_code", columnList = "office_code"), @Index(name = "reports_to", columnList = "reports_to")})
 @Entity(name = "Employees")
-public class Employees {
+public class Employees implements Serializable {
     @Id
     @Column(name = "employee_number", nullable = false)
     private Long employeeNumber;
@@ -45,12 +48,12 @@ public class Employees {
     @OneToMany(targetEntity = Customers.class)
 //    @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number")
-    private Collection<Customers> customersCollection;
+    private List<Customers> customersList;
 
     @OneToMany(targetEntity = Employees.class)
 //    @JoinColumn(referencedColumnName = "reports_to", name = "employee_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "reports_to", name = "employee_number")
-    private Collection<Employees> employeesCollection;
+    private List<Employees> employeesList;
 
     public Employees() {
     }
@@ -130,6 +133,7 @@ public class Employees {
         this.jobTitle = jobTitle;
     }
 
+    @JsonIgnore
     public Employees getEmployee() {
         return employee;
     }
@@ -138,6 +142,7 @@ public class Employees {
         this.employee = employee;
     }
 
+    @JsonIgnore
     public Offices getOffice() {
         return office;
     }
@@ -146,19 +151,21 @@ public class Employees {
         this.office = office;
     }
 
-    public Collection<Customers> getCustomersCollection() {
-        return customersCollection;
+    @JsonIgnore
+    public List<Customers> getCustomersList() {
+        return customersList;
     }
 
-    public void setCustomersCollection(Collection<Customers> customersCollection) {
-        this.customersCollection = customersCollection;
+    public void setCustomersList(List<Customers> customersList) {
+        this.customersList = customersList;
     }
 
-    public Collection<Employees> getEmployeesCollection() {
-        return employeesCollection;
+    @JsonIgnore
+    public List<Employees> getEmployeesList() {
+        return employeesList;
     }
 
-    public void setEmployeesCollection(Collection<Employees> employeesCollection) {
-        this.employeesCollection = employeesCollection;
+    public void setEmployeesList(List<Employees> employeesList) {
+        this.employeesList = employeesList;
     }
 }

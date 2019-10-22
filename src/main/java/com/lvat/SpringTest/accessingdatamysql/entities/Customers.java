@@ -1,12 +1,15 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "customers",
         indexes = {@Index(name = "sales_rep_employee_number", columnList = "sales_rep_employee_number")})
 @Entity(name = "Customers")
-public class Customers {
+public class Customers implements Serializable {
     @Id
     @Column(name = "customer_number", nullable = false)
     private Long customerNumber;
@@ -55,12 +58,12 @@ public class Customers {
     @OneToMany(targetEntity = Payments.class)
 //    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
-    private Collection<Payments> paymentsCollection;
+    private List<Payments> paymentsList;
 
     @OneToMany(targetEntity = Orders.class)
 //    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
-    private Collection<Orders> ordersCollection;
+    private List<Orders> ordersList;
 
     public Customers() {
     }
@@ -185,6 +188,7 @@ public class Customers {
         this.creditLimit = creditLimit;
     }
 
+    @JsonIgnore
     public Employees getEmployee() {
         return employee;
     }
@@ -193,19 +197,21 @@ public class Customers {
         this.employee = employee;
     }
 
-    public Collection<Payments> getPaymentsCollection() {
-        return paymentsCollection;
+    @JsonIgnore
+    public List<Payments> getPaymentsList() {
+        return paymentsList;
     }
 
-    public void setPaymentsCollection(Collection<Payments> paymentsCollection) {
-        this.paymentsCollection = paymentsCollection;
+    public void setPaymentsList(List<Payments> paymentsList) {
+        this.paymentsList = paymentsList;
     }
 
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    @JsonIgnore
+    public List<Orders> getOrdersList() {
+        return ordersList;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
 }

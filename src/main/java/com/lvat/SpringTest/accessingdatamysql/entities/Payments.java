@@ -1,13 +1,15 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.PaymentsKey;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 
 @Table(name = "payments")
 @Entity(name = "Payments")
-public class Payments {
+public class Payments implements Serializable {
     @EmbeddedId
     private PaymentsKey paymentsKey;
 
@@ -63,6 +65,7 @@ public class Payments {
         this.paymentsKey = paymentsKey;
     }
 
+    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }

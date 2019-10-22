@@ -1,13 +1,16 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.List;
 
 @Table(name = "orders", indexes = {@Index(name = "customer_number", columnList = "customer_number")})
 @Entity(name = "Orders")
-public class Orders {
+public class Orders implements Serializable {
     @Id
     @Column(name = "order_number", nullable = false)
     private Long orderNumber;
@@ -35,14 +38,14 @@ public class Orders {
 //    @JoinTable(name = "order_details",
 //            joinColumns = {@JoinColumn(name = "order_number", nullable = false, table = "orderdetails")},
 //            inverseJoinColumns = {@JoinColumn(name = "product_code", nullable = false, table = "orderdetails")})
-//    private Collection<Products> productsCollection;
+//    private List<Products> productsList;
 //    /***/
 //    /*OR*/
     /***/
     @OneToMany(targetEntity = OrderDetails.class)
 //    @JoinColumn(referencedColumnName = "order_number", name = "order_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "order_number", name = "order_number")
-    private Collection<OrderDetails> orderDetailsCollection;
+    private List<OrderDetails> orderDetailsList;
     /***/
 
     @ManyToOne(targetEntity = Customers.class)
@@ -119,22 +122,23 @@ public class Orders {
         this.customerNumber = customerNumber;
     }
 
-//    public Collection<Products> getProductsCollection() {
-//        return productsCollection;
+    //    public List<Products> getProductsList() {
+//        return productsList;
 //    }
 //
-//    public void setProductsCollection(Collection<Products> productsCollection) {
-//        this.productsCollection = productsCollection;
+//    public void setProductsList(List<Products> productsList) {
+//        this.productsList = productsList;
 //    }
-
-    public Collection<OrderDetails> getOrderDetailsCollection() {
-        return orderDetailsCollection;
+    @JsonIgnore
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderDetailsCollection(Collection<OrderDetails> orderDetailsCollection) {
-        this.orderDetailsCollection = orderDetailsCollection;
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
 
+    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }
@@ -143,11 +147,11 @@ public class Orders {
         this.customer = customer;
     }
 
-    public Collection<Products> getProducts() {
-        Collection<Products> productsCollection = new ArrayList<>();
-        for (OrderDetails orderDetail : this.orderDetailsCollection) {
-            productsCollection.add(orderDetail.getProduct());
+    public List<Products> getProducts() {
+        List<Products> productsList = new ArrayList<>();
+        for (OrderDetails orderDetail : this.orderDetailsList) {
+            productsList.add(orderDetail.getProduct());
         }
-        return productsCollection;
+        return productsList;
     }
 }

@@ -1,11 +1,14 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "product_lines")
 @Entity(name = "ProductLines")
-public class ProductLines {
+public class ProductLines implements Serializable {
     @Id
     @Column(name = "product_line", nullable = false)
     private String productLine;
@@ -22,7 +25,7 @@ public class ProductLines {
     @OneToMany(targetEntity = Products.class)
 //    @JoinColumn(referencedColumnName = "product_line", name = "product_line", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "product_line", name = "product_line")
-    private Collection<Products> productsCollection;
+    private List<Products> productsList;
 
     public ProductLines() {
     }
@@ -66,11 +69,12 @@ public class ProductLines {
         this.image = image;
     }
 
-    public Collection<Products> getProductsCollection() {
-        return productsCollection;
+    @JsonIgnore
+    public List<Products> getProductsList() {
+        return productsList;
     }
 
-    public void setProductsCollection(Collection<Products> productsCollection) {
-        this.productsCollection = productsCollection;
+    public void setProductsList(List<Products> productsList) {
+        this.productsList = productsList;
     }
 }
