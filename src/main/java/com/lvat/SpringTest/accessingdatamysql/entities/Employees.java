@@ -8,7 +8,6 @@ import java.util.Collection;
 @Entity(name = "Employees")
 public class Employees {
     @Id
-    @GeneratedValue
     @Column(name = "employee_number", nullable = false)
     private Long employeeNumber;
 
@@ -34,17 +33,23 @@ public class Employees {
     private String jobTitle;
 
     @ManyToOne
-    @JoinColumn(name = "reports_to")
+//    @JoinColumn(name = "reports_to")
+    @JoinColumn(referencedColumnName = "employee_number", name = "reports_to", insertable = false, updatable = false)
     private Employees employee;
 
     @ManyToOne
-    @JoinColumn(name = "office_code")
+//    @JoinColumn(name = "office_code")
+    @JoinColumn(referencedColumnName = "office_code", name = "office_code", insertable = false, updatable = false)
     private Offices office;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(targetEntity = Customers.class)
+//    @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number", insertable = false, updatable = false)
+    @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number")
     private Collection<Customers> customersCollection;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(targetEntity = Employees.class)
+//    @JoinColumn(referencedColumnName = "reports_to", name = "employee_number", insertable = false, updatable = false)
+    @JoinColumn(referencedColumnName = "reports_to", name = "employee_number")
     private Collection<Employees> employeesCollection;
 
     public Employees() {
@@ -52,16 +57,6 @@ public class Employees {
 
     public Employees(Long employeeNumber, String lastName, String firstName, String extension, String email, String officeCode, Long reportsTo, String jobTitle) {
         this.employeeNumber = employeeNumber;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.extension = extension;
-        this.email = email;
-        this.officeCode = officeCode;
-        this.reportsTo = reportsTo;
-        this.jobTitle = jobTitle;
-    }
-
-    public Employees(String lastName, String firstName, String extension, String email, String officeCode, Long reportsTo, String jobTitle) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.extension = extension;

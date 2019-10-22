@@ -7,7 +7,6 @@ import java.util.Collection;
 @Table(name = "offices")
 public class Offices {
     @Id
-    @GeneratedValue
     @Column(name = "office_code", nullable = false)
     private String officeCode;
 
@@ -17,7 +16,7 @@ public class Offices {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "address_ine1", nullable = false)
+    @Column(name = "address_line1", nullable = false)
     private String addressLine1;
 
     @Column(name = "address_line2")
@@ -35,7 +34,9 @@ public class Offices {
     @Column(name = "territory", nullable = false)
     private String territory;
 
-    @OneToMany(mappedBy = "offices")
+    @OneToMany(targetEntity = Employees.class)
+//    @JoinColumn(referencedColumnName = "office_code", name = "office_code", insertable = false, updatable = false)
+    @JoinColumn(referencedColumnName = "office_code", name = "office_code")
     private Collection<Employees> employeesCollection;
 
     public Offices() {
@@ -43,17 +44,6 @@ public class Offices {
 
     public Offices(String officeCode, String city, String phone, String addressLine1, String addressLine2, String state, String country, String postalCode, String territory) {
         this.officeCode = officeCode;
-        this.city = city;
-        this.phone = phone;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.state = state;
-        this.country = country;
-        this.postalCode = postalCode;
-        this.territory = territory;
-    }
-
-    public Offices(String city, String phone, String addressLine1, String addressLine2, String state, String country, String postalCode, String territory) {
         this.city = city;
         this.phone = phone;
         this.addressLine1 = addressLine1;

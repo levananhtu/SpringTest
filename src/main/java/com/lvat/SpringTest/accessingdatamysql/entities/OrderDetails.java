@@ -1,6 +1,7 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
-import com.lvat.SpringTest.accessingdatamysql.entities.id.OrderDetailsId;
+import com.lvat.SpringTest.accessingdatamysql.entities.keys.OrderDetailsKey;
+import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "order_details", indexes = {@Index(name = "product_code", columnList = "product_code")})
 public class OrderDetails {
     @EmbeddedId
-    private OrderDetailsId orderDetailsId;
+    private OrderDetailsKey orderDetailsKey;
 
     @Column(name = "quantity_ordered", nullable = false)
     private Long quantityOrdered;
@@ -19,22 +20,41 @@ public class OrderDetails {
     @Column(name = "order_line_number", nullable = false)
     private Integer orderLineNumber;
 
+    @ManyToOne
+//    @MapsId(value = "order_number")
+//    @JoinColumn(name = "order_number")
+    @JoinColumn(referencedColumnName = "order_number", name = "order_number", insertable = false, updatable = false)
+    private Orders order;
+
+    @ManyToOne
+//    @MapsId(value = "product_code")
+//    @JoinColumn(name = "product_code")
+    @JoinColumn(referencedColumnName = "product_code", name = "product_code", insertable = false, updatable = false)
+    private Products product;
+
     public OrderDetails() {
     }
 
-    public OrderDetails(OrderDetailsId orderDetailsId, Long quantityOrdered, Double priceEach, Integer orderLineNumber) {
-        this.orderDetailsId = orderDetailsId;
+    public OrderDetails(OrderDetailsKey orderDetailsKey, Long quantityOrdered, Double priceEach, Integer orderLineNumber) {
+        this.orderDetailsKey = orderDetailsKey;
         this.quantityOrdered = quantityOrdered;
         this.priceEach = priceEach;
         this.orderLineNumber = orderLineNumber;
     }
 
-    public OrderDetailsId getOrderDetailsId() {
-        return orderDetailsId;
+    public OrderDetails(Long orderNumber, String productCode, Long quantityOrdered, Double priceEach, Integer orderLineNumber) {
+        this.orderDetailsKey = new OrderDetailsKey(orderNumber, productCode);
+        this.quantityOrdered = quantityOrdered;
+        this.priceEach = priceEach;
+        this.orderLineNumber = orderLineNumber;
     }
 
-    public void setOrderDetailsId(OrderDetailsId orderDetailsId) {
-        this.orderDetailsId = orderDetailsId;
+    public OrderDetailsKey getOrderDetailsKey() {
+        return orderDetailsKey;
+    }
+
+    public void setOrderDetailsKey(OrderDetailsKey orderDetailsKey) {
+        this.orderDetailsKey = orderDetailsKey;
     }
 
     public Long getQuantityOrdered() {
@@ -59,6 +79,22 @@ public class OrderDetails {
 
     public void setOrderLineNumber(Integer orderLineNumber) {
         this.orderLineNumber = orderLineNumber;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
     }
 }
 // **

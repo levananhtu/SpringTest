@@ -1,21 +1,21 @@
-package com.lvat.SpringTest.accessingdatamysql.entities.id;
+package com.lvat.SpringTest.accessingdatamysql.entities.keys;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class OrderDetailsId implements Serializable {
+public class OrderDetailsKey implements Serializable {
     @Column(name = "order_number", nullable = false)
     private Long orderNumber;
 
     @Column(name = "product_code", nullable = false)
     private String productCode;
 
-    public OrderDetailsId() {
+    public OrderDetailsKey() {
     }
 
-    public OrderDetailsId(Long orderNumber, String productCode) {
+    public OrderDetailsKey(Long orderNumber, String productCode) {
         this.orderNumber = orderNumber;
         this.productCode = productCode;
     }

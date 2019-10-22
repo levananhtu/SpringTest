@@ -8,7 +8,6 @@ import java.util.Collection;
 @Entity(name = "Customers")
 public class Customers {
     @Id
-    @GeneratedValue
     @Column(name = "customer_number", nullable = false)
     private Long customerNumber;
 
@@ -49,13 +48,18 @@ public class Customers {
     private Double creditLimit;
 
     @ManyToOne
-    @JoinColumn(name = "sales_rep_employee_number")
+//    @JoinColumn(name = "sales_rep_employee_number")
+    @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number", insertable = false, updatable = false)
     private Employees employee;
 
-    @OneToMany(mappedBy = "customers")
+    @OneToMany(targetEntity = Payments.class)
+//    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
+    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
     private Collection<Payments> paymentsCollection;
 
-    @OneToMany(mappedBy = "customers")
+    @OneToMany(targetEntity = Orders.class)
+//    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
+    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
     private Collection<Orders> ordersCollection;
 
     public Customers() {
@@ -63,21 +67,6 @@ public class Customers {
 
     public Customers(Long customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String postalCode, String country, Long salesRepEmployeeNumber, Double creditLimit) {
         this.customerNumber = customerNumber;
-        this.customerName = customerName;
-        this.contactLastName = contactLastName;
-        this.contactFirstName = contactFirstName;
-        this.phone = phone;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.country = country;
-        this.salesRepEmployeeNumber = salesRepEmployeeNumber;
-        this.creditLimit = creditLimit;
-    }
-
-    public Customers(String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String postalCode, String country, Long salesRepEmployeeNumber, Double creditLimit) {
         this.customerName = customerName;
         this.contactLastName = contactLastName;
         this.contactFirstName = contactFirstName;

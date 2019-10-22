@@ -1,51 +1,42 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.lvat.SpringTest.accessingdatamysql.entities.keys.PaymentsKey;
+
+import javax.persistence.*;
 import java.util.Calendar;
 
-@Table
-@Entity
+@Table(name = "payments")
+@Entity(name = "Payments")
 public class Payments {
-    private Integer customerNumber;
-    private String checkNumber;
+    @EmbeddedId
+    private PaymentsKey paymentsKey;
 
-    @Column(nullable = false)
+    @Column(name = "payment_date", nullable = false)
     private Calendar paymentDate;
-    @Column(nullable = false)
+
+    @Column(name = "amount", nullable = false)
     private Double amount;
+
+    @ManyToOne
+//    @JoinColumn(name = "customer_number")
+    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
+    private Customers customer;
 
     public Payments() {
     }
 
-    public Payments(Integer customerNumber, String checkNumber, Calendar paymentDate, Double amount) {
-        this.customerNumber = customerNumber;
-        this.checkNumber = checkNumber;
+    public Payments(PaymentsKey paymentsKey, Calendar paymentDate, Double amount, Customers customer) {
+        this.paymentsKey = paymentsKey;
         this.paymentDate = paymentDate;
         this.amount = amount;
+        this.customer = customer;
     }
 
-    public Payments(String checkNumber, Calendar paymentDate, Double amount) {
-        this.checkNumber = checkNumber;
+    public Payments(Long customerNumber, String checkNumber, Calendar paymentDate, Double amount, Customers customer) {
+        this.paymentsKey = new PaymentsKey(customerNumber, checkNumber);
         this.paymentDate = paymentDate;
         this.amount = amount;
-    }
-
-    public Integer getCustomerNumber() {
-        return customerNumber;
-    }
-
-    public void setCustomerNumber(Integer customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
-    public String getCheckNumber() {
-        return checkNumber;
-    }
-
-    public void setCheckNumber(String checkNumber) {
-        this.checkNumber = checkNumber;
+        this.customer = customer;
     }
 
     public Calendar getPaymentDate() {
@@ -62,5 +53,21 @@ public class Payments {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public PaymentsKey getPaymentsKey() {
+        return paymentsKey;
+    }
+
+    public void setPaymentsKey(PaymentsKey paymentsKey) {
+        this.paymentsKey = paymentsKey;
+    }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
     }
 }
