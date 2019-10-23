@@ -1,6 +1,8 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,24 +35,15 @@ public class Orders implements Serializable {
     @Column(name = "customer_number", nullable = false)
     private Integer customerNumber;
 
-//    /***/
-//    @ManyToMany
-//    @JoinTable(name = "order_details",
-//            joinColumns = {@JoinColumn(name = "order_number", nullable = false, table = "orderdetails")},
-//            inverseJoinColumns = {@JoinColumn(name = "product_code", nullable = false, table = "orderdetails")})
-//    private List<Products> productsList;
-//    /***/
-//    /*OR*/
-    /***/
     @OneToMany(targetEntity = OrderDetails.class)
-//    @JoinColumn(referencedColumnName = "order_number", name = "order_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "order_number", name = "order_number")
+    @JsonManagedReference
+    @JsonIgnore
     private List<OrderDetails> orderDetailsList;
-    /***/
 
     @ManyToOne(targetEntity = Customers.class)
-//    @JoinColumn(name = "customer_number",)
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
+    @JsonBackReference
     private Customers customer;
 
     public Orders() {
@@ -122,14 +115,7 @@ public class Orders implements Serializable {
         this.customerNumber = customerNumber;
     }
 
-    //    public List<Products> getProductsList() {
-//        return productsList;
-//    }
-//
-//    public void setProductsList(List<Products> productsList) {
-//        this.productsList = productsList;
-//    }
-    @JsonIgnore
+//    @JsonIgnore
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -138,7 +124,7 @@ public class Orders implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }
@@ -147,6 +133,7 @@ public class Orders implements Serializable {
         this.customer = customer;
     }
 
+    @JsonIgnore
     public List<Products> getProducts() {
         List<Products> productsList = new ArrayList<>();
         for (OrderDetails orderDetail : this.orderDetailsList) {

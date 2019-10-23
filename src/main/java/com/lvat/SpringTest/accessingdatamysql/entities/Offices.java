@@ -1,6 +1,7 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,8 +39,9 @@ public class Offices implements Serializable {
     private String territory;
 
     @OneToMany(targetEntity = Employees.class)
-//    @JoinColumn(referencedColumnName = "office_code", name = "office_code", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "office_code", name = "office_code")
+    @JsonManagedReference
+    @JsonIgnore
     private List<Employees> employeesList;
 
     public Offices() {
@@ -129,7 +131,7 @@ public class Offices implements Serializable {
         this.territory = territory;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Employees> getEmployeesList() {
         return employeesList;
     }

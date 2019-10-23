@@ -1,5 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.OrderDetailsKey;
 
@@ -22,15 +23,13 @@ public class OrderDetails implements Serializable {
     private Integer orderLineNumber;
 
     @ManyToOne
-//    @MapsId(value = "order_number")
-//    @JoinColumn(name = "order_number")
     @JoinColumn(referencedColumnName = "order_number", name = "order_number", insertable = false, updatable = false)
+    @JsonBackReference
     private Orders order;
 
     @ManyToOne
-//    @MapsId(value = "product_code")
-//    @JoinColumn(name = "product_code")
     @JoinColumn(referencedColumnName = "product_code", name = "product_code", insertable = false, updatable = false)
+    @JsonBackReference
     private Products product;
 
     public OrderDetails() {
@@ -82,7 +81,7 @@ public class OrderDetails implements Serializable {
         this.orderLineNumber = orderLineNumber;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Orders getOrder() {
         return order;
     }
@@ -91,7 +90,7 @@ public class OrderDetails implements Serializable {
         this.order = order;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Products getProduct() {
         return product;
     }
@@ -100,4 +99,3 @@ public class OrderDetails implements Serializable {
         this.product = product;
     }
 }
-// **

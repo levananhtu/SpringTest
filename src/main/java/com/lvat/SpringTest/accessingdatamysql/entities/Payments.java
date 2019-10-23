@@ -1,5 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.PaymentsKey;
 
@@ -20,8 +21,8 @@ public class Payments implements Serializable {
     private Double amount;
 
     @ManyToOne
-//    @JoinColumn(name = "customer_number")
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
+    @JsonBackReference
     private Customers customer;
 
     public Payments() {
@@ -65,7 +66,7 @@ public class Payments implements Serializable {
         this.paymentsKey = paymentsKey;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }

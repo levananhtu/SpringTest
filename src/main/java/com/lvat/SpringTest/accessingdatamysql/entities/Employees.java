@@ -1,6 +1,8 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,23 +38,25 @@ public class Employees implements Serializable {
     private String jobTitle;
 
     @ManyToOne
-//    @JoinColumn(name = "reports_to")
     @JoinColumn(referencedColumnName = "employee_number", name = "reports_to", insertable = false, updatable = false)
+    @JsonBackReference
     private Employees employee;
 
     @ManyToOne
-//    @JoinColumn(name = "office_code")
     @JoinColumn(referencedColumnName = "office_code", name = "office_code", insertable = false, updatable = false)
+    @JsonBackReference
     private Offices office;
 
     @OneToMany(targetEntity = Customers.class)
-//    @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number")
+    @JsonManagedReference
+    @JsonIgnore
     private List<Customers> customersList;
 
     @OneToMany(targetEntity = Employees.class)
-//    @JoinColumn(referencedColumnName = "reports_to", name = "employee_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "reports_to", name = "employee_number")
+    @JsonManagedReference
+    @JsonIgnore
     private List<Employees> employeesList;
 
     public Employees() {
@@ -133,7 +137,7 @@ public class Employees implements Serializable {
         this.jobTitle = jobTitle;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Employees getEmployee() {
         return employee;
     }
@@ -142,7 +146,7 @@ public class Employees implements Serializable {
         this.employee = employee;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Offices getOffice() {
         return office;
     }
@@ -151,7 +155,7 @@ public class Employees implements Serializable {
         this.office = office;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Customers> getCustomersList() {
         return customersList;
     }
@@ -160,7 +164,7 @@ public class Employees implements Serializable {
         this.customersList = customersList;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Employees> getEmployeesList() {
         return employeesList;
     }
