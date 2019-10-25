@@ -71,7 +71,7 @@ public class ProductLines implements Serializable {
         this.image = image;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public List<Products> getProductsList() {
         return productsList;
     }

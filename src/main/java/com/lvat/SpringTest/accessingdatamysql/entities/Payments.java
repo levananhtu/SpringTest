@@ -1,7 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.PaymentsKey;
 
 import javax.persistence.*;
@@ -66,7 +65,7 @@ public class Payments implements Serializable {
         this.paymentsKey = paymentsKey;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }

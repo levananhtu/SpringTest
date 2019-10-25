@@ -115,7 +115,7 @@ public class Orders implements Serializable {
         this.customerNumber = customerNumber;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -124,7 +124,7 @@ public class Orders implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public Customers getCustomer() {
         return customer;
     }

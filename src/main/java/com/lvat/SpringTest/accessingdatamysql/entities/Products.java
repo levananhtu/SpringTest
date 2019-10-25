@@ -139,7 +139,7 @@ public class Products implements Serializable {
         this.msrp = msrp;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -148,7 +148,7 @@ public class Products implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public ProductLines getLines() {
         return lines;
     }
