@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/login-test")
+//@RequestMapping(path = "/login-test")
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -31,7 +31,7 @@ public class LoginController {
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
-        modelAndView.addObject(user);
+        modelAndView.addObject("users",user);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
@@ -46,7 +46,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new Users());
+            modelAndView.addObject("users", new Users());
             modelAndView.setViewName("registration");
         }
         return modelAndView;
@@ -57,9 +57,9 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Users user = userService.findUserByEmail(authentication.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("/admin/home");
+        modelAndView.setViewName("admin/home");
         return modelAndView;
     }
 }

@@ -19,12 +19,12 @@ public class UserRole {
     private Long roleId;
 
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     @JsonBackReference
     private Users user;
 
     @ManyToOne(targetEntity = Roles.class)
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id", insertable = false, updatable = false)
     @JsonBackReference
     private Roles roles;
 
