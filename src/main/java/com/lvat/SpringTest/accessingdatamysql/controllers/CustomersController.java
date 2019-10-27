@@ -23,7 +23,7 @@ public class CustomersController {
     private CustomersRepository customersRepository;
 
     @RequestMapping(path = "/by-customer-number", method = RequestMethod.GET)
-    public List<Customers> getCustomersById(@RequestParam(value = "id", defaultValue = "145") Long customerNumber, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public List<Customers> getCustomersById(@RequestParam(value = "id", defaultValue = "145") Long customerNumber, @RequestParam(value = "page", defaultValue = "0") Integer page) {
         return customersRepository.findByCustomerNumber(customerNumber, Customers.class, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
 
@@ -33,17 +33,17 @@ public class CustomersController {
     }
 
     @RequestMapping(path = "/by-customer-name", method = RequestMethod.GET)
-    public List<Customers> getCustomersByCustomerName(@RequestParam(value = "customer-name", defaultValue = "") String customerName, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public List<Customers> getCustomersByCustomerName(@RequestParam(value = "customer-name", defaultValue = "") String customerName, @RequestParam(value = "page", defaultValue = "0") Integer page) {
         return customersRepository.findByCustomerNameContaining(customerName, Customers.class, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
 
     @RequestMapping(path = "/by-country-and-state", method = RequestMethod.GET)
-    public List<Customers> getCustomersByCountryAndState(@RequestParam(value = "country", defaultValue = "") String country, @RequestParam(value = "state", defaultValue = "") String state, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public List<Customers> getCustomersByCountryAndState(@RequestParam(value = "country", defaultValue = "") String country, @RequestParam(value = "state", defaultValue = "") String state, @RequestParam(value = "page", defaultValue = "0") Integer page) {
         return customersRepository.findByCountryAndState(country, state, Customers.class, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
 
     @RequestMapping(path = "/orders", method = RequestMethod.GET)
-    public List<List<Orders>> getOrdersById(@RequestParam(value = "id", defaultValue = "145") Long customerNumber, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public List<List<Orders>> getOrdersById(@RequestParam(value = "id", defaultValue = "145") Long customerNumber, @RequestParam(value = "page", defaultValue = "0") Integer page) {
         List<List<Orders>> ordersList = new LinkedList<>();
         List<Customers> customersList = customersRepository.findByCustomerNumber(customerNumber, Customers.class, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
         for (Customers customer : customersList) {
@@ -55,7 +55,7 @@ public class CustomersController {
     @RequestMapping(path = "/cn-cl", method = RequestMethod.GET)
     public List<Customers> getByCustomerNameAndCreditLimit(@RequestParam(value = "customer-name", defaultValue = "") String customerName,
                                                            @RequestParam(value = "credit-limit", defaultValue = "100000") Double creditLimit,
-                                                           @RequestParam(value = "page", defaultValue = "1") Integer page) {
+                                                           @RequestParam(value = "page", defaultValue = "0") Integer page) {
         return customersRepository.findByCustomerNameContainingAndCreditLimitLessThanEqual(customerName, creditLimit, Customers.class, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
 }
