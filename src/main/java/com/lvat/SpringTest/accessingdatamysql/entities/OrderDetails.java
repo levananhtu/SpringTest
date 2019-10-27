@@ -1,10 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.JsonBackReference;
-=======
 import com.fasterxml.jackson.annotation.JsonIgnore;
->>>>>>> parent of 8d5ac2c... checkpoint03
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.OrderDetailsKey;
 
 import javax.persistence.*;
@@ -86,11 +82,7 @@ public class OrderDetails implements Serializable {
         this.orderLineNumber = orderLineNumber;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Orders getOrder() {
         return order;
     }
@@ -99,11 +91,7 @@ public class OrderDetails implements Serializable {
         this.order = order;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Products getProduct() {
         return product;
     }

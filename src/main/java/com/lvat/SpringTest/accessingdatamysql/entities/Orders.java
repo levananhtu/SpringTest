@@ -122,9 +122,6 @@ public class Orders implements Serializable {
         this.customerNumber = customerNumber;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     //    public List<Products> getProductsList() {
 //        return productsList;
 //    }
@@ -133,7 +130,6 @@ public class Orders implements Serializable {
 //        this.productsList = productsList;
 //    }
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -142,11 +138,7 @@ public class Orders implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Customers getCustomer() {
         return customer;
     }

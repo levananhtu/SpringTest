@@ -1,7 +1,7 @@
 package com.lvat.SpringTest.accessingdatamysql.repositories;
 
 import com.lvat.SpringTest.accessingdatamysql.entities.Products;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductsRepository extends CrudRepository<Products, Long> {
+public interface ProductsRepository extends JpaRepository<Products, Long> {
 }

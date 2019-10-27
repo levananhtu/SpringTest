@@ -1,7 +1,7 @@
 package com.lvat.SpringTest.accessingdatamysql.repositories;
 
 import com.lvat.SpringTest.accessingdatamysql.entities.Orders;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrdersRepository extends CrudRepository<Orders, Long> {
+public interface OrdersRepository extends JpaRepository<Orders, Long> {
 }

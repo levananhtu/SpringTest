@@ -129,11 +129,7 @@ public class Offices implements Serializable {
         this.territory = territory;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Employees> getEmployeesList() {
         return employeesList;
     }

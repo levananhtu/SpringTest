@@ -146,10 +146,7 @@ public class Products implements Serializable {
         this.msrp = msrp;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
-    //    public List<Orders> getOrdersList() {
+//    public List<Orders> getOrdersList() {
 //        return ordersList;
 //    }
 //
@@ -158,7 +155,6 @@ public class Products implements Serializable {
 //    }
 
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -167,11 +163,7 @@ public class Products implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public ProductLines getLines() {
         return lines;
     }

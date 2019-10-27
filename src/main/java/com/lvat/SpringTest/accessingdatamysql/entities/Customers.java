@@ -188,11 +188,7 @@ public class Customers implements Serializable {
         this.creditLimit = creditLimit;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Employees getEmployee() {
         return employee;
     }
@@ -201,11 +197,7 @@ public class Customers implements Serializable {
         this.employee = employee;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Payments> getPaymentsList() {
         return paymentsList;
     }
@@ -214,11 +206,7 @@ public class Customers implements Serializable {
         this.paymentsList = paymentsList;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Orders> getOrdersList() {
         return ordersList;
     }

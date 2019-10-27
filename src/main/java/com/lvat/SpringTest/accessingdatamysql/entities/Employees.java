@@ -133,11 +133,7 @@ public class Employees implements Serializable {
         this.jobTitle = jobTitle;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Employees getEmployee() {
         return employee;
     }
@@ -146,11 +142,7 @@ public class Employees implements Serializable {
         this.employee = employee;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public Offices getOffice() {
         return office;
     }
@@ -159,11 +151,7 @@ public class Employees implements Serializable {
         this.office = office;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Customers> getCustomersList() {
         return customersList;
     }
@@ -172,11 +160,8 @@ public class Employees implements Serializable {
         this.customersList = customersList;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
+
     public List<Employees> getEmployeesList() {
         return employeesList;
     }

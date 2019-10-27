@@ -69,11 +69,7 @@ public class ProductLines implements Serializable {
         this.image = image;
     }
 
-<<<<<<< HEAD
-    //    @JsonIgnore
-=======
     @JsonIgnore
->>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Products> getProductsList() {
         return productsList;
     }
