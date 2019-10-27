@@ -1,7 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,9 +23,8 @@ public class ProductLines implements Serializable {
     private Byte[] image;
 
     @OneToMany(targetEntity = Products.class)
+//    @JoinColumn(referencedColumnName = "product_line", name = "product_line", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "product_line", name = "product_line")
-    @JsonManagedReference
-    @JsonIgnore
     private List<Products> productsList;
 
     public ProductLines() {
@@ -71,7 +69,11 @@ public class ProductLines implements Serializable {
         this.image = image;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Products> getProductsList() {
         return productsList;
     }

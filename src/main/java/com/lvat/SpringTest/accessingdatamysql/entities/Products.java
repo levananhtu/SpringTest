@@ -1,8 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,15 +39,24 @@ public class Products implements Serializable {
     @Column(name = "MSRP", nullable = false)
     private String msrp;
 
+//    /***/
+//    @ManyToMany
+//    @JoinTable(name = "order_details",
+//            inverseJoinColumns = {@JoinColumn(name = "order_number", nullable = false, table = "orderdetails")},
+//            joinColumns = {@JoinColumn(name = "product_code", nullable = false, table = "orderdetails")})
+//    private List<Orders> ordersList;
+//    /***/
+//    /*OR*/
+    /***/
     @OneToMany(targetEntity = OrderDetails.class)
+//    @JoinColumn(referencedColumnName = "product_code", name = "product_code", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "product_code", name = "product_code")
-    @JsonManagedReference
-    @JsonIgnore
     private List<OrderDetails> orderDetailsList;
+    /***/
 
     @ManyToOne
+//    @JoinColumn(name = "product_line")
     @JoinColumn(referencedColumnName = "product_line", name = "product_line", insertable = false, updatable = false)
-    @JsonBackReference
     private ProductLines lines;
 
     public Products() {
@@ -139,7 +146,19 @@ public class Products implements Serializable {
         this.msrp = msrp;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    //    public List<Orders> getOrdersList() {
+//        return ordersList;
+//    }
+//
+//    public void setOrdersList(List<Orders> ordersList) {
+//        this.ordersList = ordersList;
+//    }
+
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
     }
@@ -148,7 +167,11 @@ public class Products implements Serializable {
         this.orderDetailsList = orderDetailsList;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public ProductLines getLines() {
         return lines;
     }
@@ -157,10 +180,10 @@ public class Products implements Serializable {
         this.lines = lines;
     }
 
-    @JsonIgnore
     public List<Orders> getOrders() {
         List<Orders> ordersList = new ArrayList<>();
-        for (OrderDetails orderDetail : this.orderDetailsList) {
+        for (OrderDetails orderDetail :
+                this.orderDetailsList) {
             ordersList.add(orderDetail.getOrder());
         }
         return ordersList;

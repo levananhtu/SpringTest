@@ -1,18 +1,10 @@
 package com.lvat.SpringTest.accessingdatamysql.repositories;
 
 import com.lvat.SpringTest.accessingdatamysql.entities.Customers;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 
-public interface CustomersRepository extends PagingAndSortingRepository<Customers, Integer> {
-    <T> Page<T> findByCustomerNumber(Long customerNumber, Class<T> type, Pageable pageable);
-
-    <T> Page<T> findByCustomerNameContaining(String customerName, Class<T> type, Pageable pageable);
-
-    <T> Page<T> findByCountryAndState(String country, String state, Class<T> type, Pageable pageable);
-
-    <T> Page<T> findByCustomerNameContainingAndCreditLimitLessThanEqual(String customerName, Double creditLimit, Class<T> type, Pageable pageable);
-
+public interface CustomersRepository extends CrudRepository<Customers, Integer> {
+    <T> List<T> getCustomerNameByCustomerNumber(Long customerNumber, Class<T> type);
 }

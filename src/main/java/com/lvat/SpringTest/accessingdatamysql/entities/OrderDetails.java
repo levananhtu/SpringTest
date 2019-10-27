@@ -1,6 +1,10 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
+=======
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> parent of 8d5ac2c... checkpoint03
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.OrderDetailsKey;
 
 import javax.persistence.*;
@@ -22,13 +26,15 @@ public class OrderDetails implements Serializable {
     private Integer orderLineNumber;
 
     @ManyToOne
+//    @MapsId(value = "order_number")
+//    @JoinColumn(name = "order_number")
     @JoinColumn(referencedColumnName = "order_number", name = "order_number", insertable = false, updatable = false)
-    @JsonBackReference
     private Orders order;
 
     @ManyToOne
+//    @MapsId(value = "product_code")
+//    @JoinColumn(name = "product_code")
     @JoinColumn(referencedColumnName = "product_code", name = "product_code", insertable = false, updatable = false)
-    @JsonBackReference
     private Products product;
 
     public OrderDetails() {
@@ -80,7 +86,11 @@ public class OrderDetails implements Serializable {
         this.orderLineNumber = orderLineNumber;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public Orders getOrder() {
         return order;
     }
@@ -89,7 +99,11 @@ public class OrderDetails implements Serializable {
         this.order = order;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public Products getProduct() {
         return product;
     }
@@ -98,3 +112,4 @@ public class OrderDetails implements Serializable {
         this.product = product;
     }
 }
+// **

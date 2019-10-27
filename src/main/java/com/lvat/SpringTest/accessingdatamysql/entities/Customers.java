@@ -1,9 +1,6 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,7 +33,6 @@ public class Customers implements Serializable {
     private String addressLine2;
 
     @Column(name = "city", nullable = false)
-    @JsonProperty("city-of-stars")
     private String city;
 
     @Column(name = "state")
@@ -55,20 +51,18 @@ public class Customers implements Serializable {
     private Double creditLimit;
 
     @ManyToOne
+//    @JoinColumn(name = "sales_rep_employee_number")
     @JoinColumn(referencedColumnName = "employee_number", name = "sales_rep_employee_number", insertable = false, updatable = false)
-    @JsonBackReference
     private Employees employee;
 
     @OneToMany(targetEntity = Payments.class)
+//    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
-    @JsonManagedReference
-    @JsonIgnore
     private List<Payments> paymentsList;
 
     @OneToMany(targetEntity = Orders.class)
+//    @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number")
-    @JsonManagedReference
-    @JsonIgnore
     private List<Orders> ordersList;
 
     public Customers() {
@@ -194,7 +188,11 @@ public class Customers implements Serializable {
         this.creditLimit = creditLimit;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public Employees getEmployee() {
         return employee;
     }
@@ -203,7 +201,11 @@ public class Customers implements Serializable {
         this.employee = employee;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Payments> getPaymentsList() {
         return paymentsList;
     }
@@ -212,7 +214,11 @@ public class Customers implements Serializable {
         this.paymentsList = paymentsList;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public List<Orders> getOrdersList() {
         return ordersList;
     }

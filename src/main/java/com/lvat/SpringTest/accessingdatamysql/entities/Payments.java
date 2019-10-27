@@ -1,6 +1,10 @@
 package com.lvat.SpringTest.accessingdatamysql.entities;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
+=======
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> parent of 8d5ac2c... checkpoint03
 import com.lvat.SpringTest.accessingdatamysql.entities.keys.PaymentsKey;
 
 import javax.persistence.*;
@@ -20,8 +24,8 @@ public class Payments implements Serializable {
     private Double amount;
 
     @ManyToOne
+//    @JoinColumn(name = "customer_number")
     @JoinColumn(referencedColumnName = "customer_number", name = "customer_number", insertable = false, updatable = false)
-    @JsonBackReference
     private Customers customer;
 
     public Payments() {
@@ -65,7 +69,11 @@ public class Payments implements Serializable {
         this.paymentsKey = paymentsKey;
     }
 
+<<<<<<< HEAD
     //    @JsonIgnore
+=======
+    @JsonIgnore
+>>>>>>> parent of 8d5ac2c... checkpoint03
     public Customers getCustomer() {
         return customer;
     }
