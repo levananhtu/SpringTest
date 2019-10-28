@@ -26,7 +26,7 @@ public class CustomersService {
     }
 
     public <T> List<T> getAllCustomers(Integer page, Class<T> type) {
-        return customersRepository.findAll(type, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
+        return customersRepository.findAllCustomersBy(type, PageRequest.of(0, 20)).get().collect(Collectors.toList());
     }
 
     public <T> List<T> getCustomersByCustomerName(String customerName, Class<T> type, Integer page) {
@@ -47,6 +47,4 @@ public class CustomersService {
     public <T> List<T> getByCustomerNameAndCreditLimit(String customerName, Double creditLimit, Class<T> type, Integer page) {
         return customersRepository.findByCustomerNameContainingAndCreditLimitLessThanEqual(customerName, creditLimit, type, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
-
-
 }

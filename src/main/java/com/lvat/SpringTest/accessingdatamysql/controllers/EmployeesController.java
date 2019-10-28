@@ -27,9 +27,9 @@ public class EmployeesController {
     }
 
     @RequestMapping(path = "/fn_ln", method = RequestMethod.GET)
-    public List<EmployeesFullProjection> getByFirstNameContainingAndLastNameContaining(@RequestParam(value = "first-name", defaultValue = "pat") String firstName,
-                                                                                       @RequestParam(value = "last-name", defaultValue = "ma") String lastName,
+    public List<EmployeesFullProjection> getByFirstNameContainingAndLastNameContaining(@RequestParam(value = "first-name", defaultValue = "ma") String firstName,
+                                                                                       @RequestParam(value = "last-name", defaultValue = "pat") String lastName,
                                                                                        @RequestParam(value = "page", defaultValue = "0") Integer page) {
-        return employeesService.findByFirstNameContainingAndLastNameContaining(firstName, lastName, EmployeesFullProjection.class, page);
+        return employeesService.findByFirstNameContainingOrLastNameContaining(firstName, lastName, EmployeesFullProjection.class, page);
     }
 }

@@ -15,6 +15,6 @@ public interface CustomersRepository extends JpaRepository<Customers, Integer> {
 
     <T> T findByCustomerNumber(Long customerNumber, Class<T> type);
 
-    <T> Page<T> findAll(Class<T> type, Pageable pageable);
+    <T> Page<T> findAllCustomersBy(Class<T> type, Pageable pageable);
 
 }

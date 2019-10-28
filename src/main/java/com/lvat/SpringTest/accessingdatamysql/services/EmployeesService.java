@@ -18,8 +18,12 @@ public class EmployeesService {
         this.employeesRepository = employeesRepository;
     }
 
+    public <T> List<T> findByFirstNameContainingOrLastNameContaining(String firstName, String lastName, Class<T> type, Integer page) {
+        return employeesRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstName, lastName, type, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
+    }
+
     public <T> List<T> findByFirstNameContainingAndLastNameContaining(String firstName, String lastName, Class<T> type, Integer page) {
-        return employeesRepository.findByFirstNameContainingAndLastNameContaining(firstName, lastName, type, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
+        return employeesRepository.findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(firstName, lastName, type, PageRequest.of(page, SIZE)).get().collect(Collectors.toList());
     }
 
     public <T> T findByEmployeeNumber(Long employeeNumber, Class<T> type) {

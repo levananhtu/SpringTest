@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmployeesRepository extends JpaRepository<Employees, Long> {
     <T> T findByEmployeeNumber(Long employeeNumber, Class<T> type);
 
-    <T> Page<T> findByFirstNameContainingAndLastNameContaining(String firstName, String lastName, Class<T> type, Pageable pageable);
+    <T> Page<T> findByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(String firstName, String lastName, Class<T> type, Pageable pageable);
+
+    <T> Page<T> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName, Class<T> type, Pageable pageable);
 }
